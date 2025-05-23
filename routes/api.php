@@ -23,6 +23,7 @@ require __DIR__ . '/endpoints/feed.php';
 require __DIR__ . '/endpoints/report.php';
 require __DIR__ . '/endpoints/home.php';
 require __DIR__ . '/endpoints/tag.php';
+require __DIR__ . '/endpoints/auth.php';
 
 
 

@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Video;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 class PlaylistService
 {
@@ -89,9 +90,9 @@ class PlaylistService
         );
     }
 
-    public function addVideoToPlaylist(User $user, string $playlistSlug, string $videoSlug): JsonResponse
+    public function addVideoToPlaylist(User $user, string $playlistId, string $videoSlug): JsonResponse
     {
-        $playlist = Playlist::query()->where('slug', $playlistSlug)->first();
+        $playlist = Playlist::query()->where('id', $playlistId)->first();
         $video = Video::query()->where('slug', $videoSlug)->first();
 
         if (!$playlist || !$video) {
@@ -182,7 +183,7 @@ class PlaylistService
     public function getUserPlaylists(User $user): JsonResponse
     {
         $playlists = $user->playlists;
-        $lastVideos = $this->getLastVideosForPlaylists($user->id);
+        $lastVideos = collect($this->getLastVideosForPlaylists($user->id));
 
         $playlists->each(function ($playlist) use ($lastVideos) {
             $lastVideo = $lastVideos->firstWhere('playlist_id', $playlist->id);

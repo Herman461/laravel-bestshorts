@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('fullpath');
             $table->string('title')->nullable()->index();
             $table->string('slug')->unique()->nullable();
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->string('preview');
             $table->unsignedBigInteger('views')->default(0)->index();
 

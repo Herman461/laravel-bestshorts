@@ -24,21 +24,25 @@ class VideoFactory extends Factory
         $title = fake()->sentence(4, true);
         $slug = str()->slug($title);
         $randomNum = mt_rand(0, 1);
+
+        $array = ['яблоко', 'банан', 'апельсин', 'виноград'];
+        $randomKey = array_rand($array);
+
         return [
             'user_id' => mt_rand(1, 2),
             'views' => random_int(0, 1500),
             'title' => mt_rand(0, 1) ? self::$num . ' - ' . $title : null,
             'slug' => $slug,
             'preview' =>  $randomNum
-                ? '/storage/videos/19-02-2025/dabaa1bd2392f88f23d69886b9946fb1f6296bb5/dabaa1bd2392f88f23d69886b9946fb1f6296bb5.webp'
-                : '/storage/videos/19-02-2025/dabaa1bd2392f88f23d69886b9946fb1f6296bb5/dabaa1bd2392f88f23d69886b9946fb1f6296bb5.webp',
+                ? '/storage/videos/14-05-2025/4620b53718e304930972acf53eeaf100910b5d08/4620b53718e304930972acf53eeaf100910b5d08.webp'
+                : '/storage/videos/14-05-2025/4620b53718e304930972acf53eeaf100910b5d08/4620b53718e304930972acf53eeaf100910b5d08.webp',
             'description' => mt_rand(0, 1) ? fake()->sentence(15, true) : null,
             'filename' => $randomNum
-                ? 'dabaa1bd2392f88f23d69886b9946fb1f6296bb5/dabaa1bd2392f88f23d69886b9946fb1f6296bb5'
-                : 'dabaa1bd2392f88f23d69886b9946fb1f6296bb5/dabaa1bd2392f88f23d69886b9946fb1f6296bb5',
+                ? '4620b53718e304930972acf53eeaf100910b5d08/4620b53718e304930972acf53eeaf100910b5d08'
+                : '4620b53718e304930972acf53eeaf100910b5d08/4620b53718e304930972acf53eeaf100910b5d08',
             'fullpath' =>  $randomNum
-                ? '/storage/videos/19-02-2025/dabaa1bd2392f88f23d69886b9946fb1f6296bb5/dabaa1bd2392f88f23d69886b9946fb1f6296bb5.m3u8'
-                : '/storage/videos/19-02-2025/dabaa1bd2392f88f23d69886b9946fb1f6296bb5/dabaa1bd2392f88f23d69886b9946fb1f6296bb5.m3u8',
+                ? '/storage/videos/14-05-2025/4620b53718e304930972acf53eeaf100910b5d08/4620b53718e304930972acf53eeaf100910b5d08.m3u8'
+                : '/storage/videos/14-05-2025/4620b53718e304930972acf53eeaf100910b5d08/4620b53718e304930972acf53eeaf100910b5d08.m3u8',
             'created_at' => fake()->dateTimeThisMonth()->format('Y-m-d H:i:s')
         ];
     }

@@ -21,8 +21,8 @@ return new class extends Migration
 
             $table->string('x')->nullable();
             $table->string('instagram')->nullable();
-            $table->string('website')->nullable();
             $table->string('reddit')->nullable();
+            $table->string('website')->nullable();
 
             $table->index('user_id');
         });

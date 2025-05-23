@@ -21,6 +21,6 @@ class FeedController extends Controller
             $request->input('page', 1)
         );
 
-        return new VideoGridCollection($videos);
+        return new VideoGridCollection($videos, $videos->lastPage());
     }
 }

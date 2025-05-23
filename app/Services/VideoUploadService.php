@@ -10,6 +10,7 @@ use FFMpeg\Format\Video\X264;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use ProtoneMedia\LaravelFFMpeg\Support\FFMpeg;
 
 class VideoUploadService
@@ -126,7 +127,11 @@ class VideoUploadService
 
     private function generatePreview(string $videoPath, string $previewPath): void
     {
-        $ffmpeg = MainFFMpeg::create(config('ffmpeg'));
+        $ffmpeg = MainFFMpeg::create([
+            'ffmpeg.binaries'  => 'C:\ffmpeg\bin\ffmpeg.exe',
+            'ffprobe.binaries' => 'C:\ffmpeg\bin\ffprobe.exe'
+        ]);
+
         $video = $ffmpeg->open(Storage::disk('public')->path($videoPath));
         $frame = $video->frame(TimeCode::fromSeconds(0));
         $frame->save(Storage::disk('public')->path($previewPath));

@@ -14,7 +14,7 @@ class HomeService
 {
     public function getHomeData(?User $user): array
     {
-        $followedUserIds = $user?->following()->pluck('users.id')->toArray() ?? [];
+        $followedUserIds = collect($user?->following())->pluck('users.id')->toArray() ?? [];
 
         return [
             'trending_creators' => $this->getTrendingCreators($followedUserIds),
@@ -42,7 +42,7 @@ class HomeService
     private function getNewVideos(): VideoGridCollection
     {
         $lastWeek = Carbon::now()->subDays(7);
-        $trendingVideoIds = $this->getTrendingVideos()->getData()->pluck('id')->toArray();
+        $trendingVideoIds = collect($this->getTrendingVideos()->getData())->pluck('id')->toArray();
 
         return new VideoGridCollection(
             Video::query()
@@ -76,7 +76,7 @@ class HomeService
     private function getNewCreators(array $followedUserIds): UserGridCollection
     {
         $lastThreeDays = Carbon::now()->subDays(3);
-        $trendingCreatorIds = $this->getTrendingCreators($followedUserIds)->getData()->pluck('user.id')->toArray();
+        $trendingCreatorIds = collect($this->getTrendingCreators($followedUserIds)->getData())->pluck('user.id')->toArray();
 
         return new UserGridCollection(
             User::query()
